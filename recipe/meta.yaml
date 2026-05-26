@@ -2,32 +2,30 @@
 {% set version = "0.15.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  git_url: https://github.com/anaconda/{{ name }}.git
-  git_rev: v{{ version }}
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
+  sha256: 6ebc742e1389a7608c92213cafcdedf460d7f3aba8bebd72e930863cf26c5396
 
 build:
-  entry_points:
-    - conda-token = anaconda_auth._conda.conda_token:cli
-  skip: true  # [py<310]
+  number: 1
   script:
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
     # Do not use python -m ... here to avoid unnecessary imports
     - {{ PYTHON }} ./src/anaconda_auth/_conda/config.py --install
-  number: 0
+  entry_points:
+    - conda-token = anaconda_auth._conda.conda_token:cli
+  skip: true  # [py<39]
 
 requirements:
-  build:
-    - git
   host:
+    - pip
     - python
     - hatchling
     - hatch-vcs >=0.3
     - setuptools-scm >=7.1
-    - pip
   run:
     - python
     - keyring
@@ -38,6 +36,7 @@ requirements:
     - requests
     - cryptography >=3.4.0
     - semver <4
+    - anaconda-anon-usage
     - anaconda-cli-base >=0.8.1
     - httpx
   run_constrained:
