@@ -1,5 +1,5 @@
 {% set name = "anaconda-auth" %}
-{% set version = "0.15.0" %}
+{% set version = "0.15.1" %}
 
 package:
   name: {{ name|lower }}
@@ -64,7 +64,7 @@ about:
   description: A client library for Anaconda APIs to authenticate and securely store API keys
   doc_url: https://anaconda.github.io/anaconda-auth
   dev_url: https://github.com/anaconda/anaconda-auth
-  home: https://anaconda.com
+  home: https://www.anaconda.com
   license: BSD-3-Clause
   license_file: LICENSE
   license_family: BSD
