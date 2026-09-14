@@ -1,5 +1,5 @@
 {% set name = "anaconda-auth" %}
-{% set version = "0.15.2" %}
+{% set version = "0.15.3" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,8 @@ package:
 
 source:
   git_url: https://github.com/anaconda/{{ name }}.git
-  git_rev: v{{ version }}
+  # Pinned to full commit SHA (not the mutable v{{ version }} tag) per team convention.
+  git_rev: 95ca19536f37182b0ec0289cc7c6a5b383152a83  # tag: v{{ version }}
 
 build:
   entry_points:
